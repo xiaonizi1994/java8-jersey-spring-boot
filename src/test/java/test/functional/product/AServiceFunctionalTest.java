@@ -3,6 +3,7 @@ package test.functional.product;
 import com.thoughtworks.gaia.GaiaApplication;
 import com.thoughtworks.gaia.common.constant.EnvProfile;
 import com.thoughtworks.gaia.common.exception.NotFoundException;
+import com.thoughtworks.gaia.product.ProductMapper;
 import com.thoughtworks.gaia.product.dao.ADao;
 import com.thoughtworks.gaia.product.dao.ProductDao;
 import com.thoughtworks.gaia.product.entity.A;
@@ -37,17 +38,40 @@ public class AServiceFunctionalTest {
     @Autowired
     private ADao aDao;
 
+    @Autowired
+    private ProductMapper mapper;
 
     @Test
     public void should_get_a_with_id() throws Exception {
-        AModel aModel = new AModel();
-        aModel.setName("name");
-        aModel.setTime_created(new Date());
+        AModel aModel = getAModel();
         aDao.save(aModel);
 
         A a = aService.getA(aModel.getId());
         assertThat(a.getId()).isEqualTo(aModel.getId());
     }
 
+    public AModel getAModel(){
+        AModel aModel = new AModel();
+        aModel.setName("name");
+        aModel.setTime_created(new Date());
+        return aModel;
+    }
+    @Test
+    public void test_addA() throws Exception {
+        AModel aModel = getAModel();
+        A a = mapper.map(aModel,A.class);
+        A addedA = aService.addA(a);
+        assertThat(addedA.getId()).isEqualTo(1L);
+    }
 
+    @Test
+    public void test_deleteA() throws Exception {
+
+
+    }
+
+    @Test
+    public void test_updateA() throws Exception {
+
+    }
 }

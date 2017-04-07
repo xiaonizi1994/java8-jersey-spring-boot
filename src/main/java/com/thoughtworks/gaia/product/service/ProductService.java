@@ -28,4 +28,5 @@ public class ProductService implements Loggable {
 
         return mapper.map(productModel, Product.class);
     }
+
 }

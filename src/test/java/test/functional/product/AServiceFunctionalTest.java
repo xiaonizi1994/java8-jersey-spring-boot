@@ -75,6 +75,12 @@ public class AServiceFunctionalTest {
 
     @Test
     public void test_updateA() throws Exception {
-
+        AModel aModel = getAModel();
+        aDao.save(aModel);
+        A a = new A();
+        a.setName("lalala");
+        a.setId(aModel.getId());
+        A newA = aService.updateA(a);
+        assertThat(aDao.idEquals(aModel.getId()).querySingle().getName()).isEqualTo("lalala");
     }
 }

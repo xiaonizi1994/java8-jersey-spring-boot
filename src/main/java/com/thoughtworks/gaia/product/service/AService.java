@@ -44,6 +44,8 @@ public class AService implements Loggable{
     }
 
     public A updateA(A a){
-        return new A();
+        AModel aModel = mapper.map(a,AModel.class);
+        aDao.update(aModel);
+        return mapper.map(aModel,A.class);
     }
 }

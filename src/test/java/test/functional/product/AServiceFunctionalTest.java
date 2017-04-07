@@ -66,8 +66,11 @@ public class AServiceFunctionalTest {
 
     @Test
     public void test_deleteA() throws Exception {
-
-
+        AModel aModel = getAModel();
+        aDao.save(aModel);
+        aService.deleteA(aModel.getId());
+        AModel aModel1 = aDao.idEquals(aModel.getId()).querySingle();
+        assertThat(aModel1).isEqualTo(null);
     }
 
     @Test

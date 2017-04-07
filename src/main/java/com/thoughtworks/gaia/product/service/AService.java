@@ -38,7 +38,9 @@ public class AService implements Loggable{
     }
 
     public A deleteA(Long a_id){
-        return new A();
+        AModel aModel = aDao.idEquals(a_id).querySingle();
+        aDao.remove(aModel);
+        return mapper.map(aModel,A.class);
     }
 
     public A updateA(A a){

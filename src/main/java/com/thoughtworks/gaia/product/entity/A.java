@@ -1,5 +1,8 @@
 package com.thoughtworks.gaia.product.entity;
 
+import com.eureka2.shading.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -32,5 +35,10 @@ public class A {
 
     public void setTime_created(Date time_created) {
         this.time_created = time_created;
+    }
+
+    public String toJson() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(this);
     }
 }

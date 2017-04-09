@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * Created by heming on 4/7/17.
@@ -33,6 +34,7 @@ public class AService implements Loggable{
 
     public A addA(A a){
         AModel aModel = mapper.map(a,AModel.class);
+        aModel.setTime_created(new Date());
         aDao.save(aModel);
         return mapper.map(aModel,A.class);
     }
